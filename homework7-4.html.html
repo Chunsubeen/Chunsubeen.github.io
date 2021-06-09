@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+        var a=13;
+        for(var i=0; i<250; i+=15){
+          context.beginPath();
+      context.arc(centerX, centerY, i, 0, 2 * Math.PI, false);
+      context.lineWidth = a;
+            a--;
+      context.strokeStyle = 'black';
+      context.stroke();  
+        }
+      context.beginPath();
+        context.moveTo(400, 0);
+      context.lineTo(400, 400);
+        context.moveTo(0, 400);
+      context.lineTo(400, 400);
+      context.stroke();
+      
+    </script>
+  </body>
+</html>      
