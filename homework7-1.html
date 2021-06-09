@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+     context.beginPath();
+    
+     for(var i =0;i<500;i++){
+         context.moveTo(10*i,0);
+         context.lineTo(10*i,500);
+     }
+    // context.lineTo(199,150);
+     context.lineJoin = 'miter';
+     context.strokeStyle="#0000FF"
+     context.stroke();
+
+    </script>
+  </body>
+</html>      
