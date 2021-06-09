@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script>
+        window.onload = function () {
+            // 문서 객체를 가져오고 설정합니다.
+            var sun = document.getElementById('sun');
+            var earth = document.getElementById('earth');
+            var moon = document.getElementById('moon');
+
+            sun.style.position = 'absolute';
+            earth.style.position = 'absolute';
+            
+            sun.style.left = 250 + 'px';
+            sun.style.top = 200 + 'px';
+
+            // 변수를 선언합니다.
+            var earthAngle = 0;
+            
+
+            // 애니메이션을 시작합니다.
+            setInterval(function () {
+                // 각도를 사용해 지구와 달의 좌표를 구합니다.
+                var earthLeft = 300 + 150 * Math.cos(earthAngle);
+                var earthTop = 300 + 150 * Math.sin(earthAngle);
+                
+                 var canvas = document.getElementById('myCanvas');
+ var context = canvas.getContext('2d');
+ var radius = 40;
+ context.clearRect(0,0,600,600);
+
+ context.beginPath();
+ context.arc(earthLeft,earthTop,radius,0,10*Math.PI,false);
+ 
+ context.fillStyle = 'green';
+ context.fill();
+ context.lineWidth = 3;
+ context.strokeStyle =  context.stroke();
+ 
+ context.beginPath();
+ context.moveTo(300, 300);
+ context.lineTo(earthLeft, earthTop);
+ context.strokeStyle = '#ff0000';
+ context.stroke();
+
+ context.beginPath();
+ context.moveTo(0, 0);
+ context.lineTo(earthLeft, earthTop);
+ context.strokeStyle = '#3333FF';
+ context.stroke();
+ 
+ context.stroke();
+
+ context.moveTo(600, 0);
+ context.lineTo(earthLeft, earthTop);
+ context.stroke();
+
+ context.moveTo(0, 600);
+ context.lineTo(earthLeft, earthTop);
+ context.stroke();
+
+ context.moveTo(600, 600);
+ context.lineTo(earthLeft, earthTop);
+ context.stroke();
+ context.closePath();
+
+                earth.style.left = earthLeft + 'px';
+                earth.style.top = earthTop + 'px';
+               
+
+                earthAngle += 0.1;
+                moonAngle += 0.3;
+            }, 1000 / 30);
+        };
+    </script>
+</head>
+<body>
+    <h1 id="sun"></h1>
+    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;"></canvas>
+    <h1 id="earth"><svg height="100" width="100">
+  </h1>
+    </body>
+</html>
