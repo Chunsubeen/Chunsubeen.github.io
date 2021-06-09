@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+</body>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var context2 = canvas.getContext('2d');
+   
+     for(var i =0;i<50;i++){
+        context.beginPath();
+         context.moveTo(10*i,0);
+         context.lineTo(10*i,10*i);
+        
+         context.strokeStyle="#3300CC"
+         context.stroke();
+
+       
+     }
+     for(var i =0;i<50;i++){
+        context.beginPath();
+     context.moveTo(0,10*i);
+         context.lineTo(10*i,10*i);
+        
+        context.strokeStyle="red"
+        context.stroke();
+     }
+   
+    </script>
+  
+</html>      
