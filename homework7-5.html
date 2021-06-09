@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Tracking Mouse and Touch Events on Canvas</title>
+    <script type="text/javascript">
+        var canvas, context, canX, canY, mouseIsDown, clickedX, clickedY, mouseDownCheck = 0;
+     
+        function init() {
+            clickedX = 0;
+            clickedY = 0;
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d"); 
+            canvas.addEventListener("mousedown", mouseDown, false);
+            canvas.addEventListener("mousemove", mouseXY, false);
+            canvas.addEventListener("mouseup", mouseUp, false);
+        }
+ 
+        function mouseUp() {
+            mouseIsDown = 0;
+            mouseDownCheck =
+            mouseXY();
+        }
+        
+        function mouseDown() {
+            mouseIsDown = 1;
+            mouseXY();
+        }
+        
+        function mouseXY(e) {
+            try{
+                if (!e) var e = event;
+                if(mouseIsDown && !mouseDownCheck){
+                    
+                    clickedX = e.pageX - canvas.offsetLeft;
+                    clickedY = e.pageY - canvas.offsetTop;
+                    mouseDownCheck = 1;
+                    
+                }
+                canX = e.pageX - canvas.offsetLeft;
+                canY = e.pageY - canvas.offsetTop;
+                showPos();
+            }
+            catch(err){
+                document.getElementById("error").innerHTML = err.message;
+            }
+            
+        }
+ 
+        function showPos() {
+            context.font = "24pt Helvetica";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = "black";
+            var str = "(" + canX + ", " + canY + ")";
+            if (mouseIsDown) str = "(" + clickedX + ", " + clickedY + ")" + " - " + str + " down";
+            else str += " up";
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillText(str, canvas.width / 2, canvas.height / 2, canvas.width - 10);
+            if (mouseIsDown) context.fillStyle = "red";
+            else context.fillStyle = "green";
+            context.fillRect(canX -5, canY -5, 10, 10);
+            if (mouseIsDown) drawR();
+            
+        }
+        function drawR(){
+            context.save();
+            context.beginPath();
+            context.strokeStyle = "blue";
+            context.lineWidth = 1;
+            context.strokeRect(clickedX, clickedY, canX-clickedX, canY-clickedY);
+            context.fill();
+            context.restore();//PopMatrix
+        }
+    </script>
+ 
+</head>
+<body onload="init()" onmousedown="">
+    <canvas id="myCanvas" height="500" width="500" style="border:1px solid #000000;">
+    </canvas>
+    <div id="error">
+    </div>
+</body>
+</html>
